@@ -14,27 +14,27 @@ const Navbar = () => {
 
 	const isCourseListPage = location.pathname.includes("/course-list");
 	const {navigate, backendUrl} = useContext(AppContext);
-	const { user, isEducator, setIsEducator, getToken, logout, updateRoleToEducator } = useAuth();
+	const { user, isEducator, logout } = useAuth();
 	const [showLogin, setShowLogin] = useState(false);
 	const [showSignup, setShowSignup] = useState(false);
 
-	const becomeEducator = async () => {
-		if(isEducator){
-			navigate('/educator')
-			return;
-		}
+	// const becomeEducator = async () => {
+	// 	if(isEducator){
+	// 		navigate('/educator')
+	// 		return;
+	// 	}
 
-		const result = await updateRoleToEducator();
-		if (result.success) {
-			navigate('/educator');
-		}
-	}
+	// 	const result = await updateRoleToEducator();
+	// 	if (result.success) {
+	// 		navigate('/educator');
+	// 	}
+	// }
 
 	const handleLogout = () => {
 		logout();
 		navigate('/');
 	};
-
+    
 	return (
 		<div
 			className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-3 ${
@@ -53,7 +53,7 @@ const Navbar = () => {
 				<div className="flex items-center gap-5">
 					{user && (
 						<>
-							<button onClick={becomeEducator}>{isEducator ? "Educator Dashboard" : "Become Educator" }</button>|{" "}
+							{isEducator && (<button onClick={() => navigate("/educator")}>Educator Dashboard</button>)}
 							<Link to="/my-enrollments">My Enrollments</Link>
 						</>
 					)}
@@ -97,7 +97,7 @@ const Navbar = () => {
 				<div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
         {user && (
 						<>
-						<button onClick={becomeEducator}>{isEducator ? "Educator Dashboard" : "Become Educator" }</button>|{" "}
+						{isEducator && (<button onClick={() => navigate("/educator")}>Educator Dashboard</button>)}
 						<Link to="/my-enrollments">My Enrollments</Link>
 					</>
 					)}
