@@ -20,6 +20,39 @@ const Player = () => {
   const [progressData, setProgressData] = useState(null)
   const [initialRating, setInitialRating] = useState(0)
 
+  // Function to extract YouTube video ID from various URL formats
+  const extractYouTubeVideoId = (url) => {
+    if (!url) return null;
+    
+    // Handle different YouTube URL formats
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+      /^([a-zA-Z0-9_-]{11})$/ // Direct video ID
+    ];
+    
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) {
+        return match[1];
+      }
+    }
+    
+    // Fallback: try splitting by '/' and taking the last part
+    const parts = url.split('/');
+    const lastPart = parts[parts.length - 1];
+    
+    // Remove any query parameters
+    const videoId = lastPart.split('?')[0].split('&')[0];
+    
+    // Validate video ID format (YouTube video IDs are 11 characters)
+    if (videoId && videoId.length === 11) {
+      return videoId;
+    }
+    
+    console.warn('Could not extract YouTube video ID from URL:', url);
+    return null;
+  }
+
 
   const getCourseData = () =>{
     enrolledCourses.map((course)=>{
@@ -31,6 +64,21 @@ const Player = () => {
 			setInitialRating(item.rating)
 			}
 		})
+        
+        // Auto-select the first lecture if no playerData is set
+        if (!playerData && course.courseContent && course.courseContent.length > 0) {
+          const firstChapter = course.courseContent[0];
+          if (firstChapter.chapterContent && firstChapter.chapterContent.length > 0) {
+            const firstLecture = firstChapter.chapterContent[0];
+            setPlayerData({
+              ...firstLecture,
+              chapter: 1,
+              lecture: 1
+            });
+            // Also open the first section by default
+            setOpenSections(prev => ({ ...prev, 0: true }));
+          }
+        }
       }
     })
   }
@@ -200,7 +248,47 @@ const Player = () => {
 				<div className="md:mt-10">
           {playerData ? (
             <div className="">
-              <YouTube videoId={playerData.lectureUrl.split('/').pop()}  iframeClassName="w-full aspect-video"/>
+              {playerData.lectureUrl ? (
+                (() => {
+                  const videoId = extractYouTubeVideoId(playerData.lectureUrl);
+                  console.log('Extracted video ID:', videoId, 'from URL:', playerData.lectureUrl);
+                  
+                  return videoId ? (
+                    <YouTube 
+                      videoId={videoId}  
+                      iframeClassName="w-full aspect-video"
+                      opts={{
+                        playerVars: {
+                          autoplay: 0,
+                          controls: 1,
+                          rel: 0,
+                          showinfo: 0,
+                          modestbranding: 1
+                        }
+                      }}
+                      onError={(error) => {
+                        console.error('YouTube player error:', error);
+                        toast.error('Error loading video. Please check the video URL.');
+                      }}
+                      onReady={(event) => {
+                        console.log('YouTube player ready');
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full aspect-video bg-red-50 border-2 border-red-200 flex items-center justify-center rounded-lg">
+                      <div className="text-center">
+                        <p className="text-red-600 font-medium">Invalid YouTube URL</p>
+                        <p className="text-red-500 text-sm mt-1">URL: {playerData.lectureUrl}</p>
+                        <p className="text-gray-500 text-xs mt-2">Please contact support to fix this video.</p>
+                      </div>
+                    </div>
+                  );
+                })()
+              ) : (
+                <div className="w-full aspect-video bg-gray-200 flex items-center justify-center rounded-lg">
+                  <p className="text-gray-500">Video URL not available</p>
+                </div>
+              )}
               
               <div className="flex justify-between items-center mt-1">
                 <p>{playerData.chapter}.{playerData.lecture} {playerData.lectureTitle} </p>
@@ -209,7 +297,14 @@ const Player = () => {
             </div>
           ) 
           :  
-          <img src={courseData ? courseData.courseThumbnail : ''} alt="courseThumbnail" />
+          <div className="text-center">
+            <img src={courseData ? courseData.courseThumbnail : ''} alt="courseThumbnail" className="w-full aspect-video object-cover rounded-lg mb-4" />
+            <div className="bg-blue-50 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Welcome to your course!</h3>
+              <p className="text-gray-600 mb-4">Click on any lecture from the course structure on the left to start watching.</p>
+              <p className="text-sm text-gray-500">Select a lecture to begin your learning journey.</p>
+            </div>
+          </div>
         }
         </div>
 			</div>

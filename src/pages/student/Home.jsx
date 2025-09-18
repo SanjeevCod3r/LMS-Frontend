@@ -2,8 +2,11 @@ import React from 'react'
 import Hero from '../../components/student/Hero'
 import Companies from '../../components/student/Companies'
 import CoursesSection from '../../components/student/CoursesSection'
+import WhyUs from '../../components/student/WhyUs'
+import WhoIsItFor from '../../components/student/WhoIsItFor'
+import MeetFounder from '../../components/student/MeetFounder'
 import TestimonialsSection from '../../components/student/TestimonialsSection'
-import CallToAction from '../../components/student/CallToAction'
+import FAQ from '../../components/student/FAQ'
 import Footer from '../../components/student/Footer'
 import Logger from '../../components/Logger'
 
@@ -16,8 +19,11 @@ const Home = () => {
 			</div>
       <Companies/>
       <CoursesSection/>
+      <WhyUs/>
+      <WhoIsItFor/>
+      <MeetFounder/>
       <TestimonialsSection/>
-      <CallToAction/>
+      <FAQ/>
       <Footer/>
     </div>
   )

@@ -17,6 +17,39 @@ const CourseDetails = () => {
 	const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
 	const [playerData, setPlayerData] = useState(null);
 
+	// Function to extract YouTube video ID from various URL formats
+	const extractYouTubeVideoId = (url) => {
+		if (!url) return null;
+		
+		// Handle different YouTube URL formats
+		const patterns = [
+			/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+			/^([a-zA-Z0-9_-]{11})$/ // Direct video ID
+		];
+		
+		for (const pattern of patterns) {
+			const match = url.match(pattern);
+			if (match) {
+				return match[1];
+			}
+		}
+		
+		// Fallback: try splitting by '/' and taking the last part
+		const parts = url.split('/');
+		const lastPart = parts[parts.length - 1];
+		
+		// Remove any query parameters
+		const videoId = lastPart.split('?')[0].split('&')[0];
+		
+		// Validate video ID format (YouTube video IDs are 11 characters)
+		if (videoId && videoId.length === 11) {
+			return videoId;
+		}
+		
+		console.warn('Could not extract YouTube video ID from URL:', url);
+		return null;
+	};
+
 	const {
 		allCourses,
 		currency,
@@ -62,13 +95,76 @@ const CourseDetails = () => {
 			);
 
 			if (data.success) {
-				const { session_url } = data;
-				window.location.replace(session_url);
+				if (data.redirect) {
+					// Free course enrollment - redirect to enrollments page
+					toast.success(data.message);
+					window.location.href = data.redirect;
+				} else if (data.orderId) {
+					// Paid course - initiate Razorpay payment
+					initiateRazorpayPayment(data);
+				}
 			} else {
 				toast.error(data.message);
 			}
 		} catch (error) {
 			toast.error(error.message);
+		}
+	};
+
+	const initiateRazorpayPayment = (paymentData) => {
+		const options = {
+			key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Your Razorpay Key ID
+			amount: paymentData.amount,
+			currency: paymentData.currency,
+			name: "Edemy LMS",
+			description: `Payment for ${paymentData.courseName}`,
+			order_id: paymentData.orderId,
+			handler: async function (response) {
+				// Payment successful - verify on backend
+				await verifyPayment(response, paymentData.purchaseId);
+			},
+			prefill: {
+				name: userData.name,
+				email: userData.email,
+				contact: userData.phone || ""
+			},
+			theme: {
+				color: "#2563eb"
+			},
+			modal: {
+				ondismiss: function() {
+					toast.info("Payment cancelled");
+				}
+			}
+		};
+
+		const razorpay = new window.Razorpay(options);
+		razorpay.open();
+	};
+
+	const verifyPayment = async (paymentResponse, purchaseId) => {
+		try {
+			const token = await getToken();
+			const { data } = await axios.post(
+				backendUrl + "/api/user/verify-payment",
+				{
+					razorpay_order_id: paymentResponse.razorpay_order_id,
+					razorpay_payment_id: paymentResponse.razorpay_payment_id,
+					razorpay_signature: paymentResponse.razorpay_signature,
+					purchaseId: purchaseId
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			);
+
+			if (data.success) {
+				toast.success(data.message);
+				// Redirect to my enrollments
+				window.location.href = "/my-enrollments";
+			} else {
+				toast.error(data.message);
+			}
+		} catch (error) {
+			toast.error("Payment verification failed: " + error.message);
 		}
 	};
 
@@ -185,11 +281,14 @@ const CourseDetails = () => {
 
 													{lecture.isPreviewFree ? (
 														<img
-															onClick={() =>
-																setPlayerData({
-																	videoId: lecture.lectureUrl.split("/").pop(),
-																})
-															}
+															onClick={() => {
+																const videoId = extractYouTubeVideoId(lecture.lectureUrl);
+																if (videoId) {
+																	setPlayerData({ videoId });
+																} else {
+																	toast.error('Invalid YouTube URL for this lecture');
+																}
+															}}
 															className="w-4 h-4 mt-1 cursor-pointer"
 															src={assets.play_icon}
 															alt="play_icon"
@@ -207,13 +306,14 @@ const CourseDetails = () => {
 														<div className="flex gap-2">
 															{lecture.isPreviewFree && (
 																<p
-																	onClick={() =>
-																		setPlayerData({
-																			videoId: lecture.lectureUrl
-																				.split("/")
-																				.pop(),
-																		})
-																	}
+																	onClick={() => {
+																		const videoId = extractYouTubeVideoId(lecture.lectureUrl);
+																		if (videoId) {
+																			setPlayerData({ videoId });
+																		} else {
+																			toast.error('Invalid YouTube URL for this lecture');
+																		}
+																	}}
 																	className="text-blue-500 cursor-pointer"
 																>
 																	Preview
@@ -252,11 +352,35 @@ const CourseDetails = () => {
 				{/* right column */}
 				<div className="max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px]">
 					{playerData ? (
-						<YouTube
-							videoId={playerData.videoId}
-							opts={{ playerVars: { autoplay: 1 } }}
-							iframeClassName="w-full aspect-video"
-						/>
+						playerData.videoId ? (
+							<YouTube
+								videoId={playerData.videoId}
+								opts={{ 
+									playerVars: { 
+										autoplay: 1,
+										controls: 1,
+										rel: 0,
+										showinfo: 0,
+										modestbranding: 1
+									} 
+								}}
+								iframeClassName="w-full aspect-video"
+								onError={(error) => {
+									console.error('YouTube player error:', error);
+									toast.error('Error loading preview video.');
+								}}
+								onReady={() => {
+									console.log('Preview video ready');
+								}}
+							/>
+						) : (
+							<div className="w-full aspect-video bg-red-50 border-2 border-red-200 flex items-center justify-center rounded-lg">
+								<div className="text-center">
+									<p className="text-red-600 font-medium">Invalid Preview Video</p>
+									<p className="text-gray-500 text-xs mt-2">Please contact support to fix this video.</p>
+								</div>
+							</div>
+						)
 					) : (
 						<img src={courseData.courseThumbnail} alt="courseThumbnail" />
 					)}
@@ -311,25 +435,28 @@ const CourseDetails = () => {
 							</div>
 						</div>
 
-						<div
-							// onClick={enrollCourse}
-							
-						>
+						<div>
 							{isAlreadyEnrolled
-								? <p className="md:mt-6 mt-4 w-full py-3 rounded text-center  bg-blue-600 text-white font-medium"> Already Enrolled </p>
+								? <p className="md:mt-6 mt-4 w-full py-3 rounded text-center bg-green-600 text-white font-medium"> Already Enrolled </p>
 								: courseData.coursePrice -
 										(courseData.discount * courseData.coursePrice) / 100 ===
 								  0.00
-								? <p className="md:mt-6 mt-4 w-full py-3 rounded text-center  bg-blue-600 text-white font-medium"> Free </p>
-								: <button onClick={enrollCourse} className="md:mt-6 mt-4 w-full py-3 rounded text-center  bg-blue-600 text-white font-medium"> Enroll Now</button>}
+								? <button onClick={enrollCourse} className="md:mt-6 mt-4 w-full py-3 rounded text-center bg-green-600 hover:bg-green-700 text-white font-medium transition-colors duration-200"> Enroll Free </button>
+								: <button onClick={enrollCourse} className="md:mt-6 mt-4 w-full py-3 rounded text-center bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors duration-200"> Enroll Now</button>}
 						</div>
 
-						<div >
-							{courseData.coursePrice -
-								(courseData.discount * courseData.coursePrice) / 100 ===
-							0.00 ? (
-								<p className="md:mt-6 mt-4 w-full text-center py-3 rounded  bg-blue-600 text-white font-medium">Click on Course structure </p>
-							) : isAlreadyEnrolled ? <Link  to="/my-enrollments"><p className="md:mt-6 mt-4 w-full text-center py-3 rounded  bg-blue-600 text-white font-medium">My Enrollments</p> </Link> : ""}
+						<div>
+							{isAlreadyEnrolled ? (
+								<Link to="/my-enrollments">
+									<button className="md:mt-6 mt-4 w-full text-center py-3 rounded bg-gray-600 hover:bg-gray-700 text-white font-medium transition-colors duration-200">
+										Go to My Enrollments
+									</button>
+								</Link>
+							) : courseData.coursePrice - (courseData.discount * courseData.coursePrice) / 100 === 0.00 ? (
+								<p className="md:mt-6 mt-4 w-full text-center py-3 rounded bg-gray-100 text-gray-600 font-medium text-sm">
+									Preview available lectures below
+								</p>
+							) : null}
 						</div>
 
 						<div className="pt-6">
