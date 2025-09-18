@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
 
@@ -17,64 +18,142 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="bg-gray-900 md:px-36 text-left w-full mt-10">
-			<div className="flex flex-col md:flex-row items-start px-8 md:px-0 justify-center gap-10 md:gap-32 py-10 border-b border-white/30">
-				<div className="flex flex-col md:items-start items-center w-full">
-					<img src={assets.logo_dark} alt="logo" />
-					<p className="mt-6 text-center sm:flex sm:flex-row sm:justify-center  md:text-left text-sm text-white/80">
-						Edemy LMS makes education accessible and engaging, connecting
-						students with educators through quality courses, interactive tools,
-						and intuitive design.
-					</p>
-				</div>
-				<div className="flex flex-col md:items-start items-center w-full">
-					<h2 className="font-semibold text-white mb-5">Company</h2>
-					<ul className="flex md:flex-col w-full justify-between text-sm text-white/80 md:space-y-2">
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/about">About us</Link>
-						</li>
-						<li>
-							<Link to="/contact">Contact us</Link>
-						</li>
-						<li>
-							<Link to="">Privacy policy</Link>
-						</li>
-					</ul>
-				</div>
-				<div className="md:flex flex-col items-start w-full">
-					<h2 className="font-semibold text-white mb-5">
-						Subscribe to our newsletter
-					</h2>
-					<p className="text-sm text-white/80">
-						The latest news, articles, and resources, sent to your inbox weekly.
-					</p>
-					<div className="flex items-center gap-2 pt-4">
-						<input
-							type="email"
-							placeholder="Enter your email"
-							className="border border-gray-500/30 bg-gray-800 text-gray-500 placeholder-gray-100 outline-none w-64 h-9 rounded px-2 text-sm"
-							value={subscribeEmail}
-							onChange={(e) => setSubscribeEmail(e.target.value)}
-						/>
-						<button
-							onClick={handleSubscribe}
-							className="bg-blue-600 w-2/4 h-9 text-white rounded"
-						>
-							Subscribe
-						</button>
-					</div>
-					<div className=" ml-8 mt-5 md:ml-0 md:mt-0">
-
-					<SocialIcons />
-					</div>
-				</div>
+		<footer className="relative bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20 text-left w-full mt-10 overflow-hidden">
+			{/* Animated background elements */}
+			<div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+				<div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-xl" />
+				<div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-pink-500/10 to-orange-500/10 rounded-full blur-xl" />
 			</div>
-			<p className="py-4 text-center text-xs md:text-sm text-white/60">
-				Copyright 2025 © Edemy by GPS. All Right Reserved.
-			</p>
+
+			{/* Curved top design */}
+			<div className="absolute top-0 left-0 w-full overflow-hidden">
+				<svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+					<path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-gray-800/50"></path>
+				</svg>
+			</div>
+
+			<div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-36 pt-20">
+				<motion.div 
+					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 border-b border-white/20"
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8 }}
+					viewport={{ once: true }}
+				>
+					{/* Brand Section */}
+					<motion.div 
+						className="lg:col-span-2 space-y-6"
+						initial={{ opacity: 0, x: -30 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.8, delay: 0.1 }}
+						viewport={{ once: true }}
+					>
+						<div className="flex items-center gap-3">
+							<motion.img 
+								src={assets.Logo1} 
+								alt="logo" 
+								className="w-12 h-12"
+								whileHover={{ scale: 1.1, rotate: 5 }}
+								transition={{ type: "spring", stiffness: 300 }}
+							/>
+							<span className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+								Hey.Naimish
+							</span>
+						</div>
+						<p className="text-white/80 leading-relaxed max-w-md">
+							Hey.Naimish makes education accessible and engaging, connecting students with educators through quality courses, interactive tools, and intuitive design.
+						</p>
+						<div className="pt-4">
+							<SocialIcons />
+						</div>
+					</motion.div>
+
+					{/* Quick Links */}
+					<motion.div 
+						className="space-y-6"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: true }}
+					>
+						<h3 className="text-xl font-bold text-white mb-6">Quick Links</h3>
+						<ul className="space-y-3">
+							{[
+								{ name: "Home", path: "/" },
+								{ name: "About us", path: "/about" },
+								{ name: "Contact us", path: "/contact" },
+								{ name: "Privacy policy", path: "" }
+							].map((link, index) => (
+								<motion.li 
+									key={index}
+									whileHover={{ x: 5 }}
+									transition={{ type: "spring", stiffness: 300 }}
+								>
+									<Link 
+										to={link.path}
+										className="text-white/70 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+									>
+										<span className="w-1 h-1 bg-blue-400 rounded-full group-hover:w-2 transition-all duration-300"></span>
+										{link.name}
+									</Link>
+								</motion.li>
+							))}
+						</ul>
+					</motion.div>
+
+					{/* Newsletter */}
+					<motion.div 
+						className="space-y-6"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.3 }}
+						viewport={{ once: true }}
+					>
+						<h3 className="text-xl font-bold text-white mb-6">Stay Updated</h3>
+						<p className="text-white/70 text-sm leading-relaxed">
+							Get the latest news, articles, and resources delivered to your inbox weekly.
+						</p>
+						<div className="space-y-3">
+							<motion.input
+								type="email"
+								placeholder="Enter your email"
+								className="w-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 outline-none rounded-xl px-4 py-3 text-sm focus:border-blue-400 focus:bg-white/20 transition-all duration-300"
+								value={subscribeEmail}
+								onChange={(e) => setSubscribeEmail(e.target.value)}
+								whileFocus={{ scale: 1.02 }}
+							/>
+							<motion.button
+								onClick={handleSubscribe}
+								className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+								whileHover={{ scale: 1.02 }}
+								whileTap={{ scale: 0.98 }}
+							>
+								Subscribe ✨
+							</motion.button>
+						</div>
+					</motion.div>
+				</motion.div>
+
+				{/* Bottom Section */}
+				<motion.div 
+					className="py-6 text-center"
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					transition={{ duration: 0.8, delay: 0.4 }}
+					viewport={{ once: true }}
+				>
+					<div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+						<p className="text-white/60 text-sm">
+							Copyright 2025 © <span className="text-white/80 font-semibold">Hey.Naimish</span> by GPS. All Rights Reserved.
+						</p>
+						<div className="flex items-center gap-6 text-white/60 text-sm">
+							<Link to="" className="hover:text-white transition-colors duration-300">Terms</Link>
+							<Link to="" className="hover:text-white transition-colors duration-300">Privacy</Link>
+							<Link to="" className="hover:text-white transition-colors duration-300">Cookies</Link>
+						</div>
+					</div>
+				</motion.div>
+			</div>
 		</footer>
 	);
 };

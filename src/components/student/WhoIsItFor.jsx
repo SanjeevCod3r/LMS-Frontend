@@ -4,77 +4,58 @@ import { motion } from 'framer-motion';
 const WhoIsItFor = () => {
   const targetAudience = [
     {
-      icon: (
-        <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-        </svg>
-      ),
+      icon: "🎓",
       title: "Students",
-      description: "Learn concepts that are not covered in traditional schooling.",
+      description: "Learn digital marketing concepts not covered in traditional schooling and build real-world skills.",
       gradient: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50",
-      hoverBg: "hover:bg-blue-100"
+      bgGradient: "from-blue-50 to-blue-100",
+      emoji: "📚",
+      color: "blue"
     },
     {
-      icon: (
-        <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-        </svg>
-      ),
+      icon: "💼",
       title: "Working Professionals",
-      description: "Develop essential skills to enhance their career and boost productivity.",
+      description: "Develop essential digital marketing skills to enhance career growth and boost productivity.",
       gradient: "from-green-500 to-green-600",
-      bgColor: "bg-green-50",
-      hoverBg: "hover:bg-green-100"
+      bgGradient: "from-green-50 to-green-100",
+      emoji: "📈",
+      color: "green"
     },
     {
-      icon: (
-        <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
+      icon: "💻",
       title: "Freelancers",
-      description: "Discover ways to grow, manage, and streamline your freelance business.",
+      description: "Discover strategies to grow, manage, and scale your freelance business with digital marketing.",
       gradient: "from-purple-500 to-purple-600",
-      bgColor: "bg-purple-50",
-      hoverBg: "hover:bg-purple-100"
+      bgGradient: "from-purple-50 to-purple-100",
+      emoji: "🚀",
+      color: "purple"
     },
     {
-      icon: (
-        <svg className="w-12 h-12 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        </svg>
-      ),
+      icon: "🔄",
       title: "Career Shifters",
-      description: "Get the guidance needed to pivot confidently into a new field.",
+      description: "Get the guidance needed to pivot confidently into digital marketing and online business.",
       gradient: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-50",
-      hoverBg: "hover:bg-orange-100"
+      bgGradient: "from-orange-50 to-orange-100",
+      emoji: "🎯",
+      color: "orange"
     },
     {
-      icon: (
-        <svg className="w-12 h-12 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      ),
-      title: "Parents",
-      description: "Manage time and personal growth while balancing family needs.",
+      icon: "👨‍👩‍👧‍👦",
+      title: "Entrepreneurs",
+      description: "Learn to build and market your business online while managing time and personal growth.",
       gradient: "from-pink-500 to-pink-600",
-      bgColor: "bg-pink-50",
-      hoverBg: "hover:bg-pink-100"
+      bgGradient: "from-pink-50 to-pink-100",
+      emoji: "💡",
+      color: "pink"
     },
     {
-      icon: (
-        <svg className="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-        </svg>
-      ),
-      title: "Dreamers",
-      description: "Gain insights and strategies to create their own journey.",
+      icon: "⭐",
+      title: "Dreamers & Creators",
+      description: "Gain insights and strategies to turn your passion into a profitable online presence.",
       gradient: "from-indigo-500 to-indigo-600",
-      bgColor: "bg-indigo-50",
-      hoverBg: "hover:bg-indigo-100"
+      bgGradient: "from-indigo-50 to-indigo-100",
+      emoji: "✨",
+      color: "indigo"
     }
   ];
 
@@ -101,74 +82,106 @@ const WhoIsItFor = () => {
   };
 
   return (
-    <div className="py-16 md:px-40 px-8 bg-white">
+    <div className="py-12 md:py-20 px-4 sm:px-6 md:px-40 bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 relative overflow-hidden">
+      {/* Curved bottom design */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-blue-100/30"></path>
+        </svg>
+      </div>
+      {/* Static background elements */}
+      <div className="absolute top-20 right-20 w-40 h-40 bg-gradient-to-r from-purple-400/5 to-pink-400/5 rounded-full blur-2xl" />
+      <div className="absolute bottom-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-400/5 to-indigo-400/5 rounded-full blur-2xl" />
+
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
-        className="text-center"
+        className="text-center relative z-10"
       >
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-        >
-          Who is WebVeda For?
-        </motion.h2>
-        <motion.p 
-          variants={itemVariants}
-          className="text-sm md:text-base text-gray-600 mb-12 max-w-2xl mx-auto"
-        >
-          Our courses are designed for learners from all walks of life, each with unique goals and aspirations
-        </motion.p>
+        {/* Enhanced Header */}
+        <motion.div className="mb-16">
+          <motion.h2 
+            variants={itemVariants}
+            className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6"
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ backgroundSize: "200% 200%" }}
+          >
+            Who is Hey.Naimish For?
+          </motion.h2>
+          
+          <motion.div 
+            className="w-32 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg mb-6"
+            animate={{
+              scaleX: [1, 1.2, 1],
+              boxShadow: [
+                "0 4px 15px rgba(59, 130, 246, 0.3)",
+                "0 4px 25px rgba(147, 51, 234, 0.5)",
+                "0 4px 15px rgba(236, 72, 153, 0.3)",
+                "0 4px 15px rgba(59, 130, 246, 0.3)"
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+          
+          <motion.p 
+            variants={itemVariants}
+            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed px-4"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            Our courses are designed for <motion.span 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold"
+              whileHover={{ scale: 1.05 }}
+            >ambitious learners</motion.span> from all walks of life, each with unique goals and aspirations
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {targetAudience.map((audience, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05,
-                y: -10,
-                transition: { 
-                  duration: 0.3,
-                  ease: "easeOut"
-                }
-              }}
-              className={`group relative bg-white p-6 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 ${audience.hoverBg} overflow-hidden cursor-pointer`}
+              className="group relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              {/* Gradient overlay on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${audience.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`}></div>
-              
-              {/* Animated border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-gray-200 transition-all duration-300"></div>
-              
-              <div className="relative z-10 flex flex-col items-center text-center space-y-4">
-                {/* Icon container with hover effect */}
-                <div className={`p-4 ${audience.bgColor} rounded-full group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg`}>
-                  <div className="group-hover:animate-pulse">
-                    {audience.icon}
+              {/* Simplified Card Container */}
+              <div className={`relative bg-gradient-to-br ${audience.bgGradient} p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-xl border border-white/50 transition-shadow duration-300 h-full`}>
+
+                <div className="relative z-10 flex flex-col items-center text-center space-y-6 h-full">
+                  {/* Simplified Icon Container */}
+                  <div className={`relative p-6 bg-gradient-to-r ${audience.gradient} rounded-2xl shadow-lg`}>
+                    <span className="text-4xl text-white drop-shadow-lg">
+                      {audience.icon}
+                    </span>
+                    
+                    {/* Static emoji */}
+                    <span className="absolute -top-2 -right-2 text-lg">
+                      {audience.emoji}
+                    </span>
                   </div>
+
+                  {/* Simplified Title */}
+                  <h3 className={`text-xl md:text-2xl font-bold bg-gradient-to-r ${audience.gradient} bg-clip-text text-transparent`}>
+                    {audience.title}
+                  </h3>
+
+                  {/* Simplified Description */}
+                  <p className="text-gray-700 leading-relaxed font-medium flex-1">
+                    {audience.description}
+                  </p>
+
+                  {/* Simple bottom accent */}
+                  <div className={`w-full h-1 bg-gradient-to-r ${audience.gradient} rounded-full opacity-50`} />
                 </div>
-                
-                {/* Title with hover effect */}
-                <h3 className="text-xl font-bold text-gray-800 group-hover:text-gray-900 transition-colors duration-300">
-                  {audience.title}
-                </h3>
-                
-                {/* Description with hover effect */}
-                <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                  {audience.description}
-                </p>
-                
-                {/* Hover indicator */}
-                <div className="w-0 h-0.5 bg-gradient-to-r from-transparent via-gray-400 to-transparent group-hover:w-full transition-all duration-500 ease-out"></div>
               </div>
-              
-              {/* Floating particles effect on hover */}
-              <div className="absolute top-4 right-4 w-2 h-2 bg-gray-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-300 delay-100"></div>
-              <div className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-gray-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-300 delay-200"></div>
-              <div className="absolute top-1/2 left-2 w-1 h-1 bg-gray-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-all duration-300 delay-300"></div>
             </motion.div>
           ))}
         </div>

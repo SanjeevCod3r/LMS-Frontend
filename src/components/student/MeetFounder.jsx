@@ -39,13 +39,13 @@ const MeetFounder = () => {
   };
 
   const stats = [
-    { number: "15.5M+", label: "Followers" },
-    { number: "2009", label: "Entrepreneur Since" },
-    { number: "4+", label: "Years as CEO" }
+    { number: "10+", label: "Years Experience" },
+    { number: "500+", label: "Clients Helped" },
+    { number: "100+", label: "Courses Created" }
   ];
 
   return (
-    <div className="py-16 md:px-40 px-8 bg-gray-50">
+    <div className="py-12 md:py-16 px-4 sm:px-6 md:px-40 bg-gray-50">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -58,61 +58,201 @@ const MeetFounder = () => {
           variants={textVariants}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <motion.h2 
+            className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6"
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ backgroundSize: "200% 200%" }}
+          >
             Meet Our Founder
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          </motion.h2>
+          <motion.div 
+            className="w-32 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg"
+            animate={{
+              scaleX: [1, 1.2, 1],
+              boxShadow: [
+                "0 4px 15px rgba(59, 130, 246, 0.3)",
+                "0 4px 25px rgba(147, 51, 234, 0.5)",
+                "0 4px 15px rgba(236, 72, 153, 0.3)",
+                "0 4px 15px rgba(59, 130, 246, 0.3)"
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
         </motion.div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Image Content - Show first on mobile */}
+          <motion.div 
+            variants={imageVariants}
+            className="relative flex items-center justify-center order-1 lg:order-2"
+          >
+            <div className="relative">
+              {/* Static background circles */}
+              <div className="absolute inset-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 rounded-full bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-pink-400/10 blur-xl" />
+              <div className="absolute inset-4 w-56 sm:w-72 md:w-88 h-56 sm:h-72 md:h-88 rounded-full border-2 border-blue-500/20 border-dashed" />
+
+              {/* Simplified logo container */}
+              <div className="relative z-10 flex items-center justify-center">
+                {/* Static backdrop */}
+                <div className="absolute inset-0 w-60 sm:w-72 md:w-80 h-60 sm:h-72 md:h-80 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10" />
+                
+                {/* Mobile-Optimized Logo */}
+                <img
+                  src={assets.Logo1}
+                  alt="Naimish Srivastava - Founder"
+                  className="relative z-20 w-40 sm:w-48 md:w-60 lg:w-72 h-40 sm:h-48 md:h-60 lg:h-72 object-contain drop-shadow-2xl hover:drop-shadow-[0_0_30px_rgba(59,130,246,0.6)] transition-all duration-300"
+                />
+
+              </div>
+                
+              {/* Simplified badge */}
+              <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-3 sm:px-6 py-1.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold shadow-2xl z-30 border-2 border-white/20">
+                <span>Founder & CEO</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Text Content - Show second on mobile */}
           <motion.div 
             variants={textVariants}
-            className="space-y-6"
+            className="space-y-6 order-2 lg:order-1"
           >
-            <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800">
-                Ankur Warikoo
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                  Content Creator
-                </span>
-                <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
-                  Entrepreneur
-                </span>
-                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                  Teacher
-                </span>
+            <div className="space-y-6">
+              <motion.h3 
+                className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-800 via-blue-700 to-purple-700 bg-clip-text text-transparent"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Naimish Srivastava
+              </motion.h3>
+              <div className="flex flex-wrap gap-3">
+                <motion.span 
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ⚡ Engineer
+                </motion.span>
+                <motion.span 
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🚀 Digital Marketer
+                </motion.span>
+                <motion.span 
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🎯 Mentor & Coach
+                </motion.span>
               </div>
             </div>
 
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                <strong className="text-gray-800">Ankur Warikoo</strong> is a dynamic individual who wears many hats — he's a content creator, entrepreneur, and teacher. As a content creator, he has built a massive online presence, with over <strong className="text-blue-600">15.5 million followers</strong> across social platforms.
-              </p>
-              <p>
-                He has been a founder since <strong className="text-purple-600">2009</strong> and co-founded <strong className="text-gray-800">nearbuy.com</strong>, leading it as CEO from 2015 to 2019, and previously spearheaded Groupon's India operations.
-              </p>
-              <p>
-                His passion for teaching led him to found <strong className="text-blue-600">WebVeda</strong>, where he teaches courses on topics like entrepreneurship, careers, and self-improvement, making complex concepts accessible to learners.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-6">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
+            <motion.div 
+              className="space-y-6 text-gray-700 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <motion.p 
+                className="text-lg md:text-xl font-medium bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent"
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                I started as an <motion.strong 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent font-bold"
                   whileHover={{ scale: 1.05 }}
-                  className="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                >engineer</motion.strong>, moved into <motion.strong 
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent font-bold"
+                  whileHover={{ scale: 1.05 }}
+                >digital marketing jobs</motion.strong>, and then launched my own journey helping businesses, freelancers, and coaches go online. Over the years, I've worked with startups and professionals to design visual identities, sales funnels, content strategies, and growth campaigns across <motion.strong 
+                  className="bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent font-bold"
+                  whileHover={{ scale: 1.05 }}
+                >Meta ads, SEO, and social media</motion.strong>.
+              </motion.p>
+              
+              <motion.div
+                className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-6 rounded-2xl border border-gradient-to-r from-blue-200 to-purple-200 shadow-lg"
+                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.p 
+                  className="text-lg font-semibold bg-gradient-to-r from-gray-800 to-blue-700 bg-clip-text text-transparent mb-4"
+                  animate={{ 
+                    textShadow: [
+                      "0 0 0px rgba(59, 130, 246, 0)",
+                      "0 0 10px rgba(59, 130, 246, 0.3)",
+                      "0 0 0px rgba(59, 130, 246, 0)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <div className="text-2xl font-bold text-blue-600">{stat.number}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </motion.div>
+                  Now, I combine that experience into <strong className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">mentorship & courses</strong> that help you:
+                </motion.p>
+                
+                <ul className="space-y-3">
+                  {[
+                    { icon: "🎯", text: "Identify your niche & position yourself with clarity", color: "from-blue-500 to-blue-600" },
+                    { icon: "🛠️", text: "Build your portfolio, landing pages, and content strategy", color: "from-purple-500 to-purple-600" },
+                    { icon: "📖", text: "Use storytelling + digital growth tactics to stand out", color: "from-pink-500 to-pink-600" },
+                    { icon: "💰", text: "Attract and convert your first paying clients", color: "from-green-500 to-green-600" }
+                  ].map((item, index) => (
+                    <motion.li 
+                      key={index}
+                      className="flex items-start group cursor-pointer"
+                      whileHover={{ x: 5, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      animate={{ opacity: 1, x: 0 }}
+                      style={{ transitionDelay: `${index * 0.1}s` }}
+                    >
+                      <motion.span 
+                        className="text-2xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                        animate={{ rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
+                      >
+                        {item.icon}
+                      </motion.span>
+                      <motion.span 
+                        className={`text-lg font-medium bg-gradient-to-r ${item.color} bg-clip-text text-transparent group-hover:from-gray-800 group-hover:to-gray-600 transition-all duration-300`}
+                      >
+                        {item.text}
+                      </motion.span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            </motion.div>
+
+            {/* Mobile-Optimized Stats */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="text-center p-4 sm:p-6 bg-gradient-to-br from-white via-blue-50 to-purple-50 rounded-2xl shadow-lg hover:shadow-xl border border-blue-100 transition-shadow duration-300"
+                >
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+                    {stat.number}
+                  </div>
+                  <div className="text-xs sm:text-sm font-semibold text-gray-600">
+                    {stat.label}
+                  </div>
+                </div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Social Links */}
             <div className="flex space-x-4 pt-4">
@@ -149,32 +289,6 @@ const MeetFounder = () => {
             </div>
           </motion.div>
 
-          {/* Image Content */}
-          <motion.div 
-            variants={imageVariants}
-            className="relative"
-          >
-            <div className="relative">
-              {/* Main image container */}
-              <div className="relative z-10 bg-white p-2 rounded-2xl shadow-2xl">
-                <img
-                  src={assets.profile_img_1}
-                  alt="Ankur Warikoo - Founder"
-                  className="w-full h-96 object-cover rounded-xl"
-                />
-                
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute -top-2 -right-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg"
-                >
-                  Founder & CEO
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </motion.div>
     </div>

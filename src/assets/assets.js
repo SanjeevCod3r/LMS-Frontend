@@ -1,5 +1,6 @@
 import logo from './logo.svg'
 import logo_dark from './logo_dark.svg'
+import Logo1 from './Logo1.png'
 import search_icon from './search_icon.svg'
 import cross_icon from './cross_icon.svg'
 import upload_area from './upload_area.svg'
@@ -49,6 +50,7 @@ export const assets = {
     abhishek,
     shreyansh,
     logo,
+    Logo1,
     search_icon,
     sketch,
     microsoft_logo,
@@ -113,21 +115,21 @@ export const dummyTestimonial = [
         role: 'Student @ AKTU',
         image: assets.abhishek,
         rating: 5,
-        feedback: 'Edemy LMS has revolutionized my teaching experience. The platform is intuitive, making course creation and student engagement seamless.',
+        feedback: 'Hey.Naimish has revolutionized my teaching experience. The platform is intuitive, making course creation and student engagement seamless.',
     },
     {
         name: 'Shreyansh Dubey',
         role: 'Student @ KNIT',
         image: assets.shreyansh,
         rating: 4.8,
-        feedback: 'Edemy LMS provides an exceptional learning environment. The structured courses, real-time tracking, and user-friendly interface are top-notch.',
+        feedback: 'Hey.Naimish provides an exceptional learning environment. The structured courses, real-time tracking, and user-friendly interface are top-notch.',
     },
     {
         name: 'Olivia Martinez',
         role: 'Software Engineer @ Microsoft',
         image: assets.profile_img_3,
         rating: 4.7,
-        feedback: 'Edemy LMS is a fantastic platform for upskilling. Its diverse course library and smooth UI make learning highly effective and engaging.',
+        feedback: 'Hey.Naimish is a fantastic platform for upskilling. Its diverse course library and smooth UI make learning highly effective and engaging.',
     },
 ];
 

@@ -116,7 +116,7 @@ const CourseDetails = () => {
 			key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Your Razorpay Key ID
 			amount: paymentData.amount,
 			currency: paymentData.currency,
-			name: "Edemy LMS",
+			name: "Hey.Naimish",
 			description: `Payment for ${paymentData.courseName}`,
 			order_id: paymentData.orderId,
 			handler: async function (response) {
