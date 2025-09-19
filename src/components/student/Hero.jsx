@@ -1,86 +1,345 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { assets } from '../../assets/assets'
 import SearchBar from './SearchBar'
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
-      }
-    }
-  };
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
+  const dynamicWords = [
+    "Personal Brand",
+    "Online Presence", 
+    "Digital Empire",
+    "Success Story",
+    "Dream Business"
+  ];
+
+  const stats = [
+    { number: "5000+", label: "Students Transformed", icon: "🎓" },
+    { number: "98%", label: "Success Rate", icon: "📈" },
+    { number: "50+", label: "Expert Courses", icon: "💎" },
+    { number: "24/7", label: "Support Available", icon: "🚀" }
+  ];
+
+  // Auto-rotate words
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % dynamicWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Mouse tracking for interactive effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className='relative flex flex-col items-center justify-center w-full max-w-full md:pt-40 pt-16 px-4 sm:px-6 md:px-0 pb-12 md:pb-20 text-center overflow-hidden'>
+    <div className='relative flex flex-col items-center justify-center w-full max-w-full min-h-screen px-4 sm:px-6 md:px-8 text-center overflow-hidden'>
       
-      {/* Subtle background elements for white section */}
-      <div className="absolute top-20 left-10 w-40 h-40 bg-black/3 rounded-full blur-2xl" />
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-black/2 rounded-full blur-2xl" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-black/1 rounded-full blur-3xl" />
+      {/* Amazing Animated Background */}
+      <div className="absolute inset-0">
+        {/* Gradient Base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white" />
+        
+        {/* Interactive Mouse Follower */}
+        <motion.div
+          className="absolute w-96 h-96 bg-black/5 rounded-full blur-3xl pointer-events-none"
+          animate={{
+            x: mousePosition.x - 192,
+            y: mousePosition.y - 192,
+          }}
+          transition={{ type: "spring", stiffness: 50, damping: 30 }}
+        />
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="relative z-10 max-w-6xl w-full mx-auto space-y-6 md:space-y-8"
-      >
-        {/* Enhanced Headline */}
-        <motion.div variants={itemVariants} className="space-y-6">
-          <h1 className='text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-black max-w-5xl mx-auto leading-tight px-2'>
-            <span className="inline-block">✨</span>{" "}
-            Build, Grow & Monetize Your Personal Brand
-          </h1>
+        {/* Floating Geometric Shapes */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-black/5 rounded-full"
+            style={{
+              width: Math.random() * 20 + 10,
+              height: Math.random() * 20 + 10,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Animated Grid Lines */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(black 1px, transparent 1px),
+              linear-gradient(90deg, black 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }} />
+        </div>
+
+        {/* Rotating Rings */}
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-64 h-64 border border-black/10 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-1/4 w-48 h-48 border border-black/5 rounded-full"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-7xl w-full mx-auto space-y-8 md:space-y-12 py-20">
+        
+        {/* Logo Integration */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          className="flex justify-center mb-8"
+        >
+          <motion.div
+            className="relative"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-black/10 rounded-full blur-xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <img
+              src={assets.Logo1}
+              alt="Hey.Naimish"
+              className="relative w-20 h-20 md:w-24 md:h-24 object-contain"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Dynamic Headline */}
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <div className="space-y-4">
+            <motion.h1 
+              className='text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-black max-w-6xl mx-auto leading-tight px-2'
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+            >
+              <motion.span 
+                className="inline-block text-5xl md:text-6xl"
+                animate={{ 
+                  rotate: [0, 10, -10, 0],
+                  scale: isHovered ? [1, 1.2, 1] : 1
+                }}
+                transition={{ 
+                  duration: isHovered ? 0.5 : 2,
+                  repeat: isHovered ? 0 : Infinity 
+                }}
+              >
+                ✨
+              </motion.span>
+              <br />
+              <span className="bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
+                Learn from the Best
+              </span>
+              <br />
+              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                Build Your{" "}
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentWordIndex}
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    exit={{ opacity: 0, y: -20, rotateX: -90 }}
+                    transition={{ duration: 0.5, type: "spring" }}
+                    className="inline-block bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent font-black"
+                  >
+                    {dynamicWords[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </motion.h1>
+          </div>
           
-          <div className="w-40 h-1.5 bg-black mx-auto rounded-full shadow-lg" />
+          <motion.div 
+            className="flex justify-center"
+            animate={{
+              scaleX: [1, 1.2, 1],
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            <div className="w-48 h-2 bg-gradient-to-r from-transparent via-black to-transparent rounded-full shadow-lg" />
+          </motion.div>
         </motion.div>
 
         {/* Enhanced Sub-Headline */}
-        <motion.div variants={itemVariants}>
-          <p className='text-base sm:text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium px-4'>
-            Blending <span className="text-black font-bold">storytelling, strategy & digital growth</span>, I help coaches, creators & professionals discover their niche, design their identity, and land their first clients — without agency costs or endless workshops.
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="max-w-5xl mx-auto"
+        >
+          <p className='text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed font-medium px-4'>
+            Blending <motion.span 
+              className="text-black font-bold bg-black/5 px-2 py-1 rounded-lg"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.1)" }}
+            >storytelling, strategy & digital growth</motion.span>, I help coaches, creators & professionals discover their niche, design their identity, and land their first clients — without agency costs or endless workshops.
           </p>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto py-8"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              className="text-center p-4 bg-white/80 backdrop-blur-sm border border-black/10 rounded-2xl shadow-lg"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                backgroundColor: "rgba(255,255,255,0.9)"
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <motion.div
+                className="text-2xl mb-2"
+                animate={{ 
+                  rotate: [0, 5, -5, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: index * 0.2
+                }}
+              >
+                {stat.icon}
+              </motion.div>
+              <div className="text-2xl md:text-3xl font-bold text-black mb-1">
+                {stat.number}
+              </div>
+              <div className="text-sm md:text-base text-gray-600 font-medium">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* Enhanced CTA Buttons */}
         <motion.div 
-          variants={itemVariants}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-6 md:pt-8 px-4"
         >
-          <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 btn-black font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg">
-            <span className="inline-block mr-2">🚀</span>
-            Explore Courses
-          </button>
+          <motion.button 
+            className="group relative w-full sm:w-auto px-10 py-4 bg-black text-white font-bold rounded-full shadow-2xl overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "0%" }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="relative z-10 flex items-center justify-center text-lg">
+              <motion.span 
+                className="inline-block mr-3 text-xl"
+                animate={{ rotate: [0, 15, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+              >
+                🚀
+              </motion.span>
+              Explore Courses
+            </span>
+          </motion.button>
           
-          <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 btn-outline-black font-bold rounded-full transition-all duration-300 text-base sm:text-lg">
-            <span className="inline-block mr-2">📞</span>
-            Book Mentorship Call
-          </button>
+          <motion.button 
+            className="group w-full sm:w-auto px-10 py-4 bg-white text-black border-2 border-black font-bold rounded-full transition-all duration-300 hover:bg-black hover:text-white"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="flex items-center justify-center text-lg">
+              <motion.span 
+                className="inline-block mr-3 text-xl"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+              >
+                📞
+              </motion.span>
+              Book Mentorship Call
+            </span>
+          </motion.button>
         </motion.div>
 
-        {/* Simplified Search Bar */}
+        {/* Enhanced Search Bar */}
         <motion.div 
-          variants={itemVariants}
-          className="pt-6 md:pt-8 w-full"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="pt-8 w-full max-w-2xl mx-auto"
         >
-          <SearchBar />
+          <motion.div
+            className="relative"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <SearchBar />
+          </motion.div>
         </motion.div>
-      </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="pt-12 flex flex-col items-center"
+        >
+          <p className="text-gray-500 text-sm mb-4 font-medium">Scroll to explore</p>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-black/20 rounded-full flex justify-center"
+          >
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-1 h-3 bg-black/40 rounded-full mt-2"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   )
 }

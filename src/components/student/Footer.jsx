@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
@@ -8,6 +8,29 @@ import SocialIcons from "../SocialIcons";
 const Footer = () => {
 	// Added subscription state
 	const [subscribeEmail, setSubscribeEmail] = useState("");
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+	const [isMobile, setIsMobile] = useState(false);
+
+	// Mobile detection
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
+	// Mouse tracking for interactive effects
+	useEffect(() => {
+		const handleMouseMove = (e) => {
+			setMousePosition({ x: e.clientX, y: e.clientY });
+		};
+		if (!isMobile) {
+			window.addEventListener('mousemove', handleMouseMove);
+			return () => window.removeEventListener('mousemove', handleMouseMove);
+		}
+	}, [isMobile]);
 
 	// Added subscription handler
 	const handleSubscribe = () => {
@@ -19,16 +42,16 @@ const Footer = () => {
 
 	return (
 		<footer className="relative bg-black text-left w-full overflow-hidden">
-			{/* Subtle background elements for black section */}
-			<div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-				<div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl" />
-				<div className="absolute bottom-10 right-10 w-24 h-24 bg-white/3 rounded-full blur-xl" />
-				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/2 rounded-full blur-3xl" />
+			{/* Simple Black Background with Subtle Effects */}
+			<div className="absolute inset-0">
+				{/* Subtle corner glows only */}
+				<div className="absolute top-10 left-10 w-32 h-32 bg-white/3 rounded-full blur-xl" />
+				<div className="absolute bottom-10 right-10 w-24 h-24 bg-white/2 rounded-full blur-xl" />
 			</div>
 
-			<div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-36 pt-20">
+			<div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-20 pt-12">
 				<motion.div 
-					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 border-b border-white/20"
+					className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-b border-white/20"
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
@@ -36,117 +59,98 @@ const Footer = () => {
 				>
 					{/* Brand Section */}
 					<motion.div 
-						className="lg:col-span-2 space-y-6"
+						className="space-y-4"
 						initial={{ opacity: 0, x: -30 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						transition={{ duration: 0.8, delay: 0.1 }}
 						viewport={{ once: true }}
 					>
 						<div className="flex items-center gap-3">
-							<motion.img 
+							<img 
 								src={assets.Logo1} 
 								alt="logo" 
-								className="w-12 h-12"
-								whileHover={{ scale: 1.1, rotate: 5 }}
-								transition={{ type: "spring", stiffness: 300 }}
+								className="w-10 h-10"
 							/>
-							<span className="text-2xl lg:text-3xl font-bold text-white">
+							<span className="text-xl font-bold text-white">
 								Hey.Naimish
 							</span>
 						</div>
-						<p className="text-white/80 leading-relaxed max-w-md">
-							Hey.Naimish makes education accessible and engaging, connecting students with educators through quality courses, interactive tools, and intuitive design.
+						<p className="text-white/70 text-sm leading-relaxed">
+							Quality education made accessible for everyone.
 						</p>
-						<div className="pt-4">
-							<SocialIcons />
-						</div>
+						<SocialIcons />
 					</motion.div>
 
 					{/* Quick Links */}
 					<motion.div 
-						className="space-y-6"
+						className="space-y-4"
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.2 }}
 						viewport={{ once: true }}
 					>
-						<h3 className="text-xl font-bold text-white mb-6">Quick Links</h3>
-						<ul className="space-y-3">
+						<h3 className="text-lg font-bold text-white">Quick Links</h3>
+						<ul className="space-y-2">
 							{[
 								{ name: "Home", path: "/" },
-								{ name: "About us", path: "/about" },
-								{ name: "Contact us", path: "/contact" },
-								{ name: "Privacy policy", path: "" }
+								{ name: "About", path: "/about" },
+								{ name: "Contact", path: "/contact" },
+								{ name: "Privacy", path: "" }
 							].map((link, index) => (
-								<motion.li 
-									key={index}
-									whileHover={{ x: 5 }}
-									transition={{ type: "spring", stiffness: 300 }}
-								>
+								<li key={index}>
 									<Link 
 										to={link.path}
-										className="text-white/70 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+										className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
 									>
-										<span className="w-1 h-1 bg-blue-400 rounded-full group-hover:w-2 transition-all duration-300"></span>
 										{link.name}
 									</Link>
-								</motion.li>
+								</li>
 							))}
 						</ul>
 					</motion.div>
 
 					{/* Newsletter */}
 					<motion.div 
-						className="space-y-6"
+						className="space-y-4"
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.3 }}
 						viewport={{ once: true }}
 					>
-						<h3 className="text-xl font-bold text-white mb-6">Stay Updated</h3>
-						<p className="text-white/70 text-sm leading-relaxed">
-							Get the latest news, articles, and resources delivered to your inbox weekly.
+						<h3 className="text-lg font-bold text-white">Newsletter</h3>
+						<p className="text-white/70 text-sm">
+							Get updates delivered to your inbox.
 						</p>
-						<div className="space-y-3">
-							<motion.input
+						<div className="space-y-2">
+							<input
 								type="email"
-								placeholder="Enter your email"
-								className="w-full bg-white/10 backdrop-blur-sm border border-white/30 text-white placeholder-white/60 outline-none rounded-xl px-4 py-3 text-sm focus:border-white focus:bg-white/20 transition-all duration-300"
+								placeholder="Your email"
+								className="w-full bg-white/10 border border-white/30 text-white placeholder-white/60 outline-none rounded-lg px-3 py-2 text-sm focus:border-white transition-all duration-300"
 								value={subscribeEmail}
 								onChange={(e) => setSubscribeEmail(e.target.value)}
-								whileFocus={{ scale: 1.02 }}
 							/>
-							<motion.button
+							<button
 								onClick={handleSubscribe}
-								className="w-full btn-white font-semibold rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
+								className="w-full bg-white text-black font-semibold rounded-lg py-2 text-sm hover:bg-gray-100 transition-all duration-300"
 							>
-								Subscribe ✨
-							</motion.button>
+								Subscribe
+							</button>
 						</div>
 					</motion.div>
 				</motion.div>
 
 				{/* Bottom Section */}
-				<motion.div 
-					className="py-6 text-center"
-					initial={{ opacity: 0 }}
-					whileInView={{ opacity: 1 }}
-					transition={{ duration: 0.8, delay: 0.4 }}
-					viewport={{ once: true }}
-				>
-					<div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-						<p className="text-white/60 text-sm">
-							Copyright 2025 © <span className="text-white/80 font-semibold">Hey.Naimish</span> by GPS. All Rights Reserved.
+				<div className="py-4 text-center border-t border-white/10">
+					<div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+						<p className="text-white/60 text-xs">
+							© 2025 <span className="text-white/80 font-semibold">Hey.Naimish</span>. All Rights Reserved.
 						</p>
-						<div className="flex items-center gap-6 text-white/60 text-sm">
+						<div className="flex items-center gap-4 text-white/60 text-xs">
 							<Link to="" className="hover:text-white transition-colors duration-300">Terms</Link>
 							<Link to="" className="hover:text-white transition-colors duration-300">Privacy</Link>
-							<Link to="" className="hover:text-white transition-colors duration-300">Cookies</Link>
 						</div>
 					</div>
-				</motion.div>
+				</div>
 			</div>
 		</footer>
 	);
