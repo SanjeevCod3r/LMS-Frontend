@@ -18,7 +18,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from './components/About'
 import ContactForm from './components/ContactForm'
-
+import EditCourse from './pages/educator/EditCourse';
 
 const App = () => {
 
@@ -68,6 +68,7 @@ const App = () => {
             <Route path='add-course' element={<AddCourse />} />
             <Route path='my-courses' element={<MyCourses />} />
             <Route path='student-enrolled' element={<StudentsEnrolled />} />
+            <Route path='edit-course/:id' element={<EditCourse />} />
         </Route>
 
       </Routes>

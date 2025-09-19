@@ -4,14 +4,33 @@ import Loading from '../../components/student/Loading'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Logger from '../../components/Logger'
+import { useNavigate } from 'react-router-dom';
 
 const MyCourses = () => {
 
   const {currency, backendUrl, isEducator, getToken} = useContext(AppContext)
   const [courses, setCourses] = useState(null)
+  const navigate = useNavigate();
 
+  const handleDeleteCourse = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
 
+    try {
+      const token = await getToken();
+      const { data } = await axios.delete(`${backendUrl}/api/course/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
+      if (data.success) {
+        toast.success("Course deleted successfully!");
+        setCourses(courses.filter(course => course._id !== id));
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const fetchEducatorCourses = async()=>{
     // setCourses(allCourses)
@@ -73,6 +92,26 @@ const MyCourses = () => {
                   <td className='px-4 py-3'>{course.enrolledStudents.length}</td>
                   <td className='px-4 py-3'>
                     {new Date(course.createdAt).toLocaleDateString()}
+                  </td>
+                   <td className="px-4 py-3 flex gap-3">
+                   
+                    {/* Update */}
+                    <button
+                      onClick={() =>
+                        navigate(`/educator/edit-course/${course._id}`)
+                      }
+                      className="text-blue-600 hover:underline"
+                    >
+                      Edit
+                    </button>
+
+                    {/* Delete */}
+                    <button
+                      onClick={() => handleDeleteCourse(course._id)}
+                      className="text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
                   </td>
 
                 </tr>
