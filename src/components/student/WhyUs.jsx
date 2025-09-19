@@ -75,16 +75,11 @@ const WhyUs = () => {
   };
 
   return (
-    <div className="py-12 md:py-20 px-4 sm:px-6 md:px-40 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 relative overflow-hidden">
-      {/* Curved bottom design */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-purple-100/30"></path>
-        </svg>
-      </div>
-      {/* Static background elements */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-xl" />
-      <div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-pink-400/5 to-orange-400/5 rounded-full blur-xl" />
+    <div className="py-12 md:py-20 px-4 sm:px-6 md:px-40 relative overflow-hidden">
+      {/* Subtle background elements for white section */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-black/3 rounded-full blur-xl" />
+      <div className="absolute bottom-10 right-10 w-24 h-24 bg-black/2 rounded-full blur-xl" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-black/1 rounded-full blur-3xl" />
 
       <motion.div
         initial="hidden"
@@ -97,28 +92,13 @@ const WhyUs = () => {
         <motion.div className="mb-16">
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ backgroundSize: "200% 200%" }}
+            className="text-3xl sm:text-4xl md:text-6xl font-bold text-black mb-6"
           >
             Why Choose Hey.Naimish?
           </motion.h2>
           
           <motion.div 
-            className="w-32 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg mb-6"
-            animate={{
-              scaleX: [1, 1.2, 1],
-              boxShadow: [
-                "0 4px 15px rgba(59, 130, 246, 0.3)",
-                "0 4px 25px rgba(147, 51, 234, 0.5)",
-                "0 4px 15px rgba(236, 72, 153, 0.3)",
-                "0 4px 15px rgba(59, 130, 246, 0.3)"
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="w-32 h-1.5 bg-black mx-auto rounded-full shadow-lg mb-6"
           />
           
           <motion.p 
@@ -128,7 +108,7 @@ const WhyUs = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             Discover what makes our learning platform the <motion.span 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold"
+              className="text-black font-bold"
               whileHover={{ scale: 1.05 }}
             >perfect choice</motion.span> for your educational journey
           </motion.p>
@@ -145,12 +125,12 @@ const WhyUs = () => {
               viewport={{ once: true }}
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              {/* Simplified Card Container */}
-              <div className={`relative bg-gradient-to-br ${feature.bgGradient} p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-xl border border-white/50 transition-shadow duration-300 h-full`}>
+              {/* Card Container */}
+              <div className="relative bg-white p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-xl border border-gray-200 transition-all duration-300 h-full hover:scale-105">
 
                 <div className="relative z-10 flex flex-col items-center text-center space-y-6 h-full">
-                  {/* Simplified Icon Container */}
-                  <div className={`relative p-6 bg-gradient-to-r ${feature.gradient} rounded-2xl shadow-lg`}>
+                  {/* Icon Container */}
+                  <div className="relative p-6 bg-black rounded-2xl shadow-lg">
                     <span className="text-4xl text-white drop-shadow-lg">
                       {feature.icon}
                     </span>
@@ -161,18 +141,18 @@ const WhyUs = () => {
                     </span>
                   </div>
 
-                  {/* Simplified Title */}
-                  <h3 className={`text-xl md:text-2xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                  {/* Title */}
+                  <h3 className="text-xl md:text-2xl font-bold text-black">
                     {feature.title}
                   </h3>
 
-                  {/* Simplified Description */}
+                  {/* Description */}
                   <p className="text-gray-700 leading-relaxed font-medium flex-1">
                     {feature.description}
                   </p>
 
-                  {/* Simple bottom accent */}
-                  <div className={`w-full h-1 bg-gradient-to-r ${feature.gradient} rounded-full opacity-50`} />
+                  {/* Bottom accent */}
+                  <div className="w-full h-1 bg-black rounded-full" />
                 </div>
               </div>
             </motion.div>

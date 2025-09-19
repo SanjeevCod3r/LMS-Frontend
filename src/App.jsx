@@ -6,6 +6,8 @@ import CourseDetails from './pages/student/CourseDetails'
 import MyEnrollMents from './pages/student/MyEnrollMents'
 import Player from './pages/student/Player'
 import Loading from './components/student/Loading'
+import SiteLoader from './components/SiteLoader'
+import { useLoader } from './hooks/useLoader'
 import Educator from './pages/educator/Educator'
 import Dashboard from './pages/educator/Dashboard'
 import AddCourse from './pages/educator/AddCourse'
@@ -21,11 +23,13 @@ import ContactForm from './components/ContactForm'
 import EditCourse from './pages/educator/EditCourse';
 
 const App = () => {
-
-
+  const isLoading = useLoader(3000); // 3 seconds minimum loading time
   const isEducatorRoute = useMatch('/educator/*')
 
-
+  // Show loader on initial page load
+  if (isLoading) {
+    return <SiteLoader />;
+  }
 
   return (
     <div className='text-default min-h-screen bg-white'>

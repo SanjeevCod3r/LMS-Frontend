@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { assets } from '../../assets/assets'
 
 const Loading = () => {
 
@@ -16,17 +18,60 @@ const Loading = () => {
       return () => clearTimeout(timer);
     }
   }, []);
-  // }, [path, navigate]);
 
   return (
-    <div className='min-h-[10vh] flex items-center justify-center'>
-      {/* <div className='w-16 sm:w-20 aspect-square border-4 border-gray-400 border-t-4 border-t-blue-400 rounded-full animate-spin '></div> */}
+    <div className='min-h-[50vh] flex flex-col items-center justify-center space-y-6'>
+      {/* Logo with rotation */}
+      <motion.div
+        className="relative"
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      >
+        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+          <img
+            src={assets.Logo1}
+            alt="Loading"
+            className="w-10 h-10 object-contain"
+          />
+        </div>
+      </motion.div>
+
+      {/* Loading dots */}
       <div className="flex space-x-2">
-          <div className="w-4 h-4 bg-blue-500 rounded-full animate-ping animation-delay-400"></div>
-           <div className="w-4 h-4 bg-green-500 rounded-full animate-ping animation-delay-400"></div>
-           <div className="w-4 h-4 bg-yellow-500 rounded-full animate-ping animation-delay-400"></div>
-           {/* <div className="w-4 h-4 bg-red-600 rounded-full animate-ping animation-delay-400"></div> */}
-         </div>
+        {[0, 1, 2].map((index) => (
+          <motion.div
+            key={index}
+            className="w-3 h-3 bg-black rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              delay: index * 0.2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Loading text */}
+      <motion.p
+        className="text-gray-600 text-sm font-medium"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        Loading...
+      </motion.p>
     </div>
   )
 }

@@ -97,3 +97,194 @@ html, body {
 .rich-text ul { margin-left: 30px; list-style-type: disc; }
 
 .rich-text li { margin-bottom: 8px; }
+
+/* Line clamp utilities for better text truncation */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Course card improvements */
+.course-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .course-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .course-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .course-card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Black and White Theme */
+:root {
+  --black-primary: #000000;
+  --black-secondary: #1a1a1a;
+  --black-tertiary: #2d2d2d;
+  --white-primary: #ffffff;
+  --white-secondary: #f8f9fa;
+  --white-tertiary: #e9ecef;
+  --gray-light: #6c757d;
+  --gray-dark: #495057;
+}
+
+/* Section Theme Classes */
+.section-black {
+  background-color: var(--black-primary);
+  color: var(--white-primary);
+}
+
+.section-white {
+  background-color: var(--white-primary);
+  color: var(--black-primary);
+}
+
+.section-black-secondary {
+  background-color: var(--black-secondary);
+  color: var(--white-primary);
+}
+
+.section-white-secondary {
+  background-color: var(--white-secondary);
+  color: var(--black-primary);
+}
+
+/* Text utilities for black/white theme */
+.text-theme-primary {
+  color: inherit;
+}
+
+.text-theme-secondary {
+  color: var(--gray-light);
+}
+
+.text-theme-muted {
+  opacity: 0.7;
+}
+
+/* Button themes */
+.btn-black {
+  background-color: var(--black-primary);
+  color: var(--white-primary);
+  border: 2px solid var(--black-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-black:hover {
+  background-color: var(--white-primary);
+  color: var(--black-primary);
+  border-color: var(--black-primary);
+}
+
+.btn-white {
+  background-color: var(--white-primary);
+  color: var(--black-primary);
+  border: 2px solid var(--white-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+  background-color: var(--black-primary);
+  color: var(--white-primary);
+  border-color: var(--white-primary);
+}
+
+.btn-outline-black {
+  background-color: transparent;
+  color: var(--black-primary);
+  border: 2px solid var(--black-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-outline-black:hover {
+  background-color: var(--black-primary);
+  color: var(--white-primary);
+}
+
+.btn-outline-white {
+  background-color: transparent;
+  color: var(--white-primary);
+  border: 2px solid var(--white-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-outline-white:hover {
+  background-color: var(--white-primary);
+  color: var(--black-primary);
+}
+
+/* Card themes */
+.card-black {
+  background-color: var(--black-secondary);
+  color: var(--white-primary);
+  border: 1px solid var(--black-tertiary);
+}
+
+.card-white {
+  background-color: var(--white-primary);
+  color: var(--black-primary);
+  border: 1px solid var(--white-tertiary);
+}
+
+/* Gradient alternatives for black/white theme */
+.gradient-black-to-gray {
+  background: linear-gradient(135deg, var(--black-primary) 0%, var(--black-secondary) 100%);
+}
+
+.gradient-white-to-gray {
+  background: linear-gradient(135deg, var(--white-primary) 0%, var(--white-secondary) 100%);
+}
+
+/* Override colorful gradients with black/white */
+.bg-gradient-to-r.from-blue-600.via-purple-600.to-pink-600,
+.bg-gradient-to-r.from-blue-600.to-purple-600,
+.bg-gradient-to-br.from-blue-50.via-white.to-purple-50\/30 {
+  background: var(--black-primary) !important;
+  background-image: none !important;
+}
+
+/* Ensure proper contrast */
+.section-black * {
+  border-color: var(--black-tertiary);
+}
+
+.section-white * {
+  border-color: var(--white-tertiary);
+}
+
+/* Special styling for alternating sections */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gray-light) 50%, transparent 100%);
+  margin: 0;
+}

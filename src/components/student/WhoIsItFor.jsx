@@ -82,16 +82,11 @@ const WhoIsItFor = () => {
   };
 
   return (
-    <div className="py-12 md:py-20 px-4 sm:px-6 md:px-40 bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 relative overflow-hidden">
-      {/* Curved bottom design */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-blue-100/30"></path>
-        </svg>
-      </div>
-      {/* Static background elements */}
-      <div className="absolute top-20 right-20 w-40 h-40 bg-gradient-to-r from-purple-400/5 to-pink-400/5 rounded-full blur-2xl" />
-      <div className="absolute bottom-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-400/5 to-indigo-400/5 rounded-full blur-2xl" />
+    <div className="py-12 md:py-20 px-4 sm:px-6 md:px-40 relative overflow-hidden">
+      {/* Subtle background elements for black section */}
+      <div className="absolute top-20 right-20 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
+      <div className="absolute bottom-20 left-20 w-32 h-32 bg-white/3 rounded-full blur-2xl" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/2 rounded-full blur-3xl" />
 
       <motion.div
         initial="hidden"
@@ -104,38 +99,23 @@ const WhoIsItFor = () => {
         <motion.div className="mb-16">
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ backgroundSize: "200% 200%" }}
+            className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6"
           >
             Who is Hey.Naimish For?
           </motion.h2>
           
           <motion.div 
-            className="w-32 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg mb-6"
-            animate={{
-              scaleX: [1, 1.2, 1],
-              boxShadow: [
-                "0 4px 15px rgba(59, 130, 246, 0.3)",
-                "0 4px 25px rgba(147, 51, 234, 0.5)",
-                "0 4px 15px rgba(236, 72, 153, 0.3)",
-                "0 4px 15px rgba(59, 130, 246, 0.3)"
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="w-32 h-1.5 bg-white mx-auto rounded-full shadow-lg mb-6"
           />
           
           <motion.p 
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed px-4"
+            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-medium leading-relaxed px-4"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             Our courses are designed for <motion.span 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold"
+              className="text-white font-bold"
               whileHover={{ scale: 1.05 }}
             >ambitious learners</motion.span> from all walks of life, each with unique goals and aspirations
           </motion.p>
@@ -152,12 +132,12 @@ const WhoIsItFor = () => {
               viewport={{ once: true }}
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              {/* Simplified Card Container */}
-              <div className={`relative bg-gradient-to-br ${audience.bgGradient} p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-xl border border-white/50 transition-shadow duration-300 h-full`}>
+              {/* Card Container */}
+              <div className="relative bg-white p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-xl border border-gray-200 transition-all duration-300 h-full hover:scale-105">
 
                 <div className="relative z-10 flex flex-col items-center text-center space-y-6 h-full">
-                  {/* Simplified Icon Container */}
-                  <div className={`relative p-6 bg-gradient-to-r ${audience.gradient} rounded-2xl shadow-lg`}>
+                  {/* Icon Container */}
+                  <div className="relative p-6 bg-black rounded-2xl shadow-lg">
                     <span className="text-4xl text-white drop-shadow-lg">
                       {audience.icon}
                     </span>
@@ -168,18 +148,18 @@ const WhoIsItFor = () => {
                     </span>
                   </div>
 
-                  {/* Simplified Title */}
-                  <h3 className={`text-xl md:text-2xl font-bold bg-gradient-to-r ${audience.gradient} bg-clip-text text-transparent`}>
+                  {/* Title */}
+                  <h3 className="text-xl md:text-2xl font-bold text-black">
                     {audience.title}
                   </h3>
 
-                  {/* Simplified Description */}
+                  {/* Description */}
                   <p className="text-gray-700 leading-relaxed font-medium flex-1">
                     {audience.description}
                   </p>
 
-                  {/* Simple bottom accent */}
-                  <div className={`w-full h-1 bg-gradient-to-r ${audience.gradient} rounded-full opacity-50`} />
+                  {/* Bottom accent */}
+                  <div className="w-full h-1 bg-black rounded-full" />
                 </div>
               </div>
             </motion.div>

@@ -44,17 +44,11 @@ const FAQ = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-xl" />
-      <div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-pink-400/5 to-orange-400/5 rounded-full blur-xl" />
-
-      {/* Curved top design */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-white/50"></path>
-        </svg>
-      </div>
+    <div className="relative w-full min-h-screen py-20 md:py-24 px-4 sm:px-6 md:px-8 overflow-hidden">
+      {/* Subtle background elements for white section */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-black/3 rounded-full blur-xl" />
+      <div className="absolute bottom-10 right-10 w-24 h-24 bg-black/2 rounded-full blur-xl" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-black/1 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header Section */}
@@ -66,7 +60,7 @@ const FAQ = () => {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -76,7 +70,7 @@ const FAQ = () => {
           </motion.h2>
           
           <motion.div 
-            className="w-40 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg mb-8"
+            className="w-40 h-2 bg-black mx-auto rounded-full shadow-lg mb-8"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -90,7 +84,7 @@ const FAQ = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            Find answers to common questions about <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">Hey.Naimish</span>. Can't find what you're looking for? Feel free to contact our support team.
+            Find answers to common questions about <span className="text-black font-semibold">Hey.Naimish</span>. Can't find what you're looking for? Feel free to contact our support team.
           </motion.p>
         </motion.div>
 
@@ -105,17 +99,17 @@ const FAQ = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <motion.button
                   onClick={() => toggleFAQ(index)}
                   className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group"
-                  whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.02)" }}
+                  whileHover={{ backgroundColor: "rgba(0, 0, 0, 0.02)" }}
                 >
-                  <span className="text-xl md:text-2xl font-semibold text-gray-800 pr-4 group-hover:text-blue-600 transition-colors duration-300">
+                  <span className="text-xl md:text-2xl font-semibold text-gray-800 pr-4 group-hover:text-black transition-colors duration-300">
                     {faq.question}
                   </span>
                   <motion.div 
-                    className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center"
+                    className="flex-shrink-0 w-10 h-10 bg-black rounded-full flex items-center justify-center"
                     animate={{ rotate: openIndex === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -172,14 +166,14 @@ const FAQ = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-10 border border-white/50 shadow-lg">
+          <div className="bg-gray-50 rounded-2xl p-10 border border-gray-200 shadow-lg">
             <motion.div
               initial={{ scale: 0.9 }}
               whileInView={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-black mb-4">
                 Still have questions? 🤔
               </h3>
               <p className="text-lg md:text-xl text-gray-600 mb-8">
@@ -187,7 +181,7 @@ const FAQ = () => {
               </p>
               <motion.a
                 href="/contact"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="inline-flex items-center gap-3 px-10 py-4 btn-black text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

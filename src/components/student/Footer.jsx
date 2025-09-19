@@ -18,18 +18,12 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="relative bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20 text-left w-full mt-10 overflow-hidden">
-			{/* Animated background elements */}
+		<footer className="relative bg-black text-left w-full overflow-hidden">
+			{/* Subtle background elements for black section */}
 			<div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-				<div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-xl" />
-				<div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-pink-500/10 to-orange-500/10 rounded-full blur-xl" />
-			</div>
-
-			{/* Curved top design */}
-			<div className="absolute top-0 left-0 w-full overflow-hidden">
-				<svg className="relative block w-full h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-					<path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-gray-800/50"></path>
-				</svg>
+				<div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl" />
+				<div className="absolute bottom-10 right-10 w-24 h-24 bg-white/3 rounded-full blur-xl" />
+				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/2 rounded-full blur-3xl" />
 			</div>
 
 			<div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-36 pt-20">
@@ -56,7 +50,7 @@ const Footer = () => {
 								whileHover={{ scale: 1.1, rotate: 5 }}
 								transition={{ type: "spring", stiffness: 300 }}
 							/>
-							<span className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+							<span className="text-2xl lg:text-3xl font-bold text-white">
 								Hey.Naimish
 							</span>
 						</div>
@@ -117,14 +111,14 @@ const Footer = () => {
 							<motion.input
 								type="email"
 								placeholder="Enter your email"
-								className="w-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 outline-none rounded-xl px-4 py-3 text-sm focus:border-blue-400 focus:bg-white/20 transition-all duration-300"
+								className="w-full bg-white/10 backdrop-blur-sm border border-white/30 text-white placeholder-white/60 outline-none rounded-xl px-4 py-3 text-sm focus:border-white focus:bg-white/20 transition-all duration-300"
 								value={subscribeEmail}
 								onChange={(e) => setSubscribeEmail(e.target.value)}
 								whileFocus={{ scale: 1.02 }}
 							/>
 							<motion.button
 								onClick={handleSubscribe}
-								className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+								className="w-full btn-white font-semibold rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
 								whileHover={{ scale: 1.02 }}
 								whileTap={{ scale: 0.98 }}
 							>

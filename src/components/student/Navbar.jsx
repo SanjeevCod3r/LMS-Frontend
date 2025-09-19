@@ -40,9 +40,7 @@ const Navbar = () => {
 	return (
 		<>
 			<div
-				className={`flex items-center justify-between w-full px-4 sm:px-6 md:px-8 lg:px-36 border-b border-gray-500 py-3 ${
-					isCourseListPage ? "bg-white" : "bg-cyan-100/70"
-				} relative z-50`}
+				className="flex items-center justify-between w-full px-4 sm:px-6 md:px-8 lg:px-36 border-b border-gray-300 py-3 bg-white relative z-50"
 			>
 				<div onClick={()=>navigate('/')} className="flex items-center gap-2 sm:gap-3 cursor-pointer flex-shrink-0">
 					<img 
@@ -75,7 +73,7 @@ const Navbar = () => {
 						<span className="text-sm font-medium">{user.name}</span>
 						<button
 							onClick={handleLogout}
-							className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+							className="btn-black text-sm px-3 py-1 rounded"
 						>
 							Logout
 						</button>
@@ -84,13 +82,13 @@ const Navbar = () => {
 					<div className="flex gap-2">
 						<button
 							onClick={() => setShowLogin(true)}
-							className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+							className="btn-outline-black px-4 py-2 rounded"
 						>
 							Login
 						</button>
 						<button
 							onClick={() => setShowSignup(true)}
-							className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+							className="btn-black px-4 py-2 rounded"
 						>
 							Sign Up
 						</button>
