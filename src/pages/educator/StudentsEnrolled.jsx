@@ -12,24 +12,22 @@ const StudentsEnrolled = () => {
 
   const [enrolledStudents, setEnrolledStudents] = useState(null)
 
-  const fetchEnrolledStudents = async () =>{
-    // setEnrolledStudents(dummyStudentEnrolled);
+  const fetchEnrolledStudents = async () => {
     try {
       const token = await getToken();
-      const {data} = await axios.get(backendUrl + '/api/educator/enrolled-students', { headers: { Authorization: `Bearer ${token}` } })
-      // console.log("data", data.enrolledStudents);
+      const { data } = await axios.get(backendUrl + "/api/educator/dashboard", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       
-
-      if(data.success){
-        setEnrolledStudents(data.enrolledStudents.reverse())
-      }
-      else{
-        toast.error(data.message)
+      if (data.success) {
+        setEnrolledStudents(data.dashboardData.enrolledStudentsData.reverse());
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   useEffect(()=>{
     if(isEducator){
@@ -51,7 +49,6 @@ const StudentsEnrolled = () => {
             <th className='px-4 py-3 font-semibold text-center hidden sm:table-cell'>#</th>
             <th className='px-4 py-3 font-semibold '>Student name</th>
             <th className='px-4 py-3 font-semibold '>Course Title</th>
-            <th className='px-4 py-3 font-semibold '>Date</th>
           </tr>
         </thead>
 
@@ -70,10 +67,6 @@ const StudentsEnrolled = () => {
                      <span className="truncate">{item.student.name}</span>
                   </td>
                   <td className="px-4 py-3 truncate">{item.courseTitle} </td>
-                  <td className='px-4 py-3'>
-                    {new Date(item.purchaseDate).toLocaleDateString()}
-                  </td>
-
                 </tr>
               ))}
 
