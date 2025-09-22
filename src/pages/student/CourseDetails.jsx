@@ -233,79 +233,74 @@ const CourseDetails = () => {
 						</span>
 					</p>
 
-					<div className="pt-8 text-gray-800">
-						<h2 className="text-xl font-semibold">Course Structure</h2>
-						<div className="pt-5">
+					{/* Course Structure Section */}
+					<div className="pt-12 text-black">
+						{/* Section Header */}
+						<div className="mb-8">
+							<h2 className="text-3xl font-bold text-black mb-3">Course Structure</h2>
+							<div className="w-16 h-1 bg-black"></div>
+							<p className="text-gray-600 mt-3">
+								Explore the course curriculum and preview available lectures
+							</p>
+						</div>
+
+						{/* Course Chapters */}
+						<div className="space-y-4">
 							{courseData.courseContent.map((chapter, index) => (
 								<div
-									className="border border-gray-300 bg-white mb-2 rounded"
+									className="bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
 									key={index}
 								>
+									{/* Chapter Header */}
 									<div
-										className="flex items-center justify-between px-4 py-3 cursor-pointer select-none"
+										className="flex items-center justify-between px-6 py-4 cursor-pointer select-none bg-gradient-to-r from-gray-50 to-white hover:from-gray-100 hover:to-gray-50 transition-all duration-200"
 										onClick={() => toggleSection(index)}
 									>
-										<div className="flex items-center gap-2">
-											<img
-												className={`transform transition-transform ${
-													openSections[index] ? "rotate-180" : ""
-												}`}
-												src={assets.down_arrow_icon}
-												alt="down_arrow_icon"
-											/>
-											<p className="font-medium md:text-base text-sm">
-												{chapter.chapterTitle}
-											</p>
+										<div className="flex items-center gap-3">
+											<div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+												<img
+													className={`w-4 h-4 transform transition-transform duration-300 ${
+														openSections[index] ? "rotate-180" : ""
+													}`}
+													src={assets.down_arrow_icon}
+													alt="expand"
+													style={{ filter: 'brightness(0) invert(1)' }}
+												/>
+											</div>
+											<div>
+												<p className="font-semibold text-black text-lg">
+													Chapter {index + 1}: {chapter.chapterTitle}
+												</p>
+												<p className="text-sm text-gray-500 mt-1">
+													{chapter.chapterContent.length} lectures • {calculateChapterTime(chapter)}
+												</p>
+											</div>
 										</div>
-										<p className="text-sm md:text-default">
-											{chapter.chapterContent.length} lectures -{" "}
-											{calculateChapterTime(chapter)}{" "}
-										</p>
+										<div className="flex items-center gap-2">
+											<span className="text-xs bg-black text-white px-3 py-1 rounded-full font-medium">
+												{chapter.chapterContent.length} lectures
+											</span>
+										</div>
 									</div>
 
+									{/* Chapter Content */}
 									<div
-										className={`overflow-hidden transition-all duration-300 ${
-											openSections[index] ? "max-h-9g" : "max-h-0"
+										className={`overflow-hidden transition-all duration-500 ease-in-out ${
+											openSections[index] ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
 										}`}
 									>
-										<ul className="list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300">
-											{chapter.chapterContent.map((lecture, i) => (
-												<li key={i} className="flex items-start gap-2 py-1">
-													{/* <img onClick={()=> setPlayerData({
-                                  videoId: lecture.lectureUrl.split('/').pop()
-                                })}
-														className="w-4 h-4 mt-1 cursor-pointer"
-														src={assets.play_icon}
-														alt="play_icon"
-													/> */}
-
-													{lecture.isPreviewFree ? (
-														<img
-															onClick={() => {
-																const videoId = extractYouTubeVideoId(lecture.lectureUrl);
-																if (videoId) {
-																	setPlayerData({ videoId });
-																} else {
-																	toast.error('Invalid YouTube URL for this lecture');
-																}
-															}}
-															className="w-4 h-4 mt-1 cursor-pointer"
-															src={assets.play_icon}
-															alt="play_icon"
-														/>
-													) : (
-														<img
-															className="w-4 h-4 mt-1"
-															src={assets.play_icon}
-															alt="play_icon"
-														/>
-													)}
-
-													<div className="flex items-center justify-between w-full text-gray-800 text-xs md:text-default">
-														<p>{lecture.lectureTitle}</p>
-														<div className="flex gap-2">
-															{lecture.isPreviewFree && (
-																<p
+										<div className="border-t border-gray-200 bg-gray-50">
+											<ul className="p-4 space-y-3">
+												{chapter.chapterContent.map((lecture, i) => (
+													<li key={i} className="flex items-center gap-4 p-3 bg-white rounded-lg border border-gray-100 hover:border-gray-300 hover:shadow-md transition-all duration-200">
+														{/* Play/Lock Icon */}
+														<div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 ${
+															lecture.isPreviewFree 
+																? 'bg-black cursor-pointer hover:bg-gray-800' 
+																: 'bg-gray-300 cursor-not-allowed'
+														}`}>
+															{lecture.isPreviewFree ? (
+																<img
 																	onClick={() => {
 																		const videoId = extractYouTubeVideoId(lecture.lectureUrl);
 																		if (videoId) {
@@ -314,22 +309,66 @@ const CourseDetails = () => {
 																			toast.error('Invalid YouTube URL for this lecture');
 																		}
 																	}}
-																	className="text-blue-500 cursor-pointer"
-																>
-																	Preview
-																</p>
+																	className="w-4 h-4 ml-0.5"
+																	src={assets.play_icon}
+																	alt="play"
+																	style={{ filter: 'brightness(0) invert(1)' }}
+																/>
+															) : (
+																<svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+																	<path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+																</svg>
 															)}
-															<p>
-																{humanizeDuration(
-																	lecture.lectureDuration * 60 * 1000,
-																	{ units: ["h", "m"] }
-																)}
-															</p>
 														</div>
-													</div>
-												</li>
-											))}
-										</ul>
+
+														{/* Lecture Content */}
+														<div className="flex-1 min-w-0">
+															<div className="flex items-center justify-between">
+																<div className="flex-1">
+																	<h4 className="font-medium text-black text-sm md:text-base truncate">
+																		{i + 1}. {lecture.lectureTitle}
+																	</h4>
+																	<div className="flex items-center gap-4 mt-1">
+																		<span className="text-xs text-gray-500">
+																			{humanizeDuration(
+																				lecture.lectureDuration * 60 * 1000,
+																				{ units: ["h", "m"] }
+																			)}
+																		</span>
+																		{lecture.isPreviewFree && (
+																			<span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+																				Free Preview
+																			</span>
+																		)}
+																	</div>
+																</div>
+																
+																{/* Action Button */}
+																{lecture.isPreviewFree ? (
+																	<button
+																		onClick={() => {
+																			const videoId = extractYouTubeVideoId(lecture.lectureUrl);
+																			if (videoId) {
+																				setPlayerData({ videoId });
+																			} else {
+																				toast.error('Invalid YouTube URL for this lecture');
+																			}
+																		}}
+																		className="btn-black px-4 py-2 text-xs font-medium rounded-lg hover:shadow-md transition-all duration-200"
+																	>
+																		Preview
+																	</button>
+																) : (
+																	<span className="text-xs text-gray-400 px-4 py-2 bg-gray-100 rounded-lg font-medium">
+																		Locked
+																	</span>
+																)}
+															</div>
+														</div>
+													</li>
+												))}
+											</ul>
+										</div>
 									</div>
 								</div>
 							))}
