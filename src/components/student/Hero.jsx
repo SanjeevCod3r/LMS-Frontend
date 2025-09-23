@@ -168,7 +168,7 @@ const Hero = () => {
           className="max-w-5xl mx-auto"
         >
           <p className='text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed font-medium px-4'>
-          No Agency Fees, No Boring Lectures, No Endless Workshops <motion.span 
+          Master Digital Marketing Hands-On <motion.span 
               className="text-black font-bold bg-black/5 px-2 py-1 rounded-lg"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.1)" }}
             >No Agency Fees, No Boring Lectures, No Endless Workshops</motion.span>.
