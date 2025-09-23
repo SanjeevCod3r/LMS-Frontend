@@ -168,10 +168,10 @@ const Hero = () => {
           className="max-w-5xl mx-auto"
         >
           <p className='text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed font-medium px-4'>
-            Blending <motion.span 
+          No Agency Fees, No Boring Lectures, No Endless Workshops <motion.span 
               className="text-black font-bold bg-black/5 px-2 py-1 rounded-lg"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.1)" }}
-            >storytelling, strategy & digital growth</motion.span>, I help coaches, creators & professionals discover their niche, design their identity, and land their first clients — without agency costs or endless workshops.
+            >No Agency Fees, No Boring Lectures, No Endless Workshops</motion.span>.
           </p>
         </motion.div>
 
