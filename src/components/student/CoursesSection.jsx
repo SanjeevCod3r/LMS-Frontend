@@ -38,8 +38,9 @@ const CoursesSection = () => {
                         transition={{ duration: 0.8, delay: 0.1 }}
                         viewport={{ once: true }}
                     >
-                        Learn from the <span className="relative">
-                            <span className="text-white font-black underline decoration-white decoration-4 underline-offset-8">best</span>
+                        What This Program Is 
+                        <span className="relative">
+                            <span className="text-white font-black underline decoration-white decoration-4 underline-offset-8"> About</span>
                         </span>
                     </motion.h2>
                     
@@ -58,7 +59,7 @@ const CoursesSection = () => {
                         transition={{ duration: 0.8, delay: 0.3 }}
                         viewport={{ once: true }}
                     >
-                        Discover our <span className="text-white font-semibold">top-rated courses</span> across various categories. From coding and design to business and wellness, our courses are crafted to deliver exceptional results.
+                        Join our <span className="text-white font-semibold">Digital Marketing & Personal Branding Mentorship Program</span> to learn key skills step by step. Work on live projects with expert help to gain real experience &  attract clients faster—up to 40% quicker.
                     </motion.p>
 
                     {/* Stats Section */}
