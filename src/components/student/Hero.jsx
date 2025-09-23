@@ -122,12 +122,8 @@ const Hero = () => {
               onHoverStart={() => setIsHovered(true)}
               onHoverEnd={() => setIsHovered(false)}
             >
-              <span className="bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                Learn from the Best
-              </span>
-              <br />
               <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                Build Your{" "}
+              🚀 Build Your{" "}
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={currentWordIndex}
