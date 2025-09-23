@@ -286,7 +286,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="pt-12 flex flex-col items-center"
+          className="pt-12 hidden md:flex flex-col items-center"
         >
           <p className="text-gray-500 text-sm mb-4 font-medium">Scroll to explore</p>
           <motion.div
