@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { assets } from '../../assets/assets'
+import frontVideo from '../../assets/frontvideo.mp4'
 import SearchBar from './SearchBar'
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,7 +11,6 @@ const Hero = () => {
   const dynamicWords = [
     "Personal Brand",
     "Online Presence", 
-    "Digital Empire",
     "Success Story",
     "Dream Business"
   ];
@@ -109,34 +108,6 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl w-full mx-auto space-y-8 md:space-y-12 py-20">
-        
-        {/* Logo Integration */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, type: "spring" }}
-          className="flex justify-center mb-8"
-        >
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-black/10 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <img
-              src={assets.Logo1}
-              alt="Hey.Naimish"
-              className="relative w-20 h-20 md:w-24 md:h-24 object-contain"
-            />
-          </motion.div>
-        </motion.div>
 
         {/* Dynamic Headline */}
         <motion.div 
@@ -151,20 +122,6 @@ const Hero = () => {
               onHoverStart={() => setIsHovered(true)}
               onHoverEnd={() => setIsHovered(false)}
             >
-              <motion.span 
-                className="inline-block text-5xl md:text-6xl"
-                animate={{ 
-                  rotate: [0, 10, -10, 0],
-                  scale: isHovered ? [1, 1.2, 1] : 1
-                }}
-                transition={{ 
-                  duration: isHovered ? 0.5 : 2,
-                  repeat: isHovered ? 0 : Infinity 
-                }}
-              >
-                ✨
-              </motion.span>
-              <br />
               <span className="bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
                 Learn from the Best
               </span>
@@ -317,6 +274,26 @@ const Hero = () => {
           >
             <SearchBar />
           </motion.div>
+        </motion.div>
+
+        {/* Front Video Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.1 }}
+          className="pt-10 px-4"
+        >
+          <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-white">
+            <div className="absolute -inset-1 bg-gradient-to-r from-black/10 via-gray-400/10 to-black/10 rounded-3xl blur-2xl pointer-events-none" />
+            <video
+              src={frontVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="relative w-full h-auto aspect-video"
+            />
+          </div>
         </motion.div>
 
         {/* Scroll Indicator */}

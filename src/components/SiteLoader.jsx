@@ -139,14 +139,6 @@ const SiteLoader = () => {
           >
             Hey.Naimish
           </motion.h1>
-          <motion.p
-            className="text-lg text-gray-300 font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.3 }}
-          >
-            Learning Management System
-          </motion.p>
         </motion.div>
 
         {/* Loading progress bar */}
