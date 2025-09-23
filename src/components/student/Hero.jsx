@@ -140,14 +140,23 @@ const Hero = () => {
             </motion.h1>
           </div>
           
-          <motion.div 
-            className="flex justify-center"
-            animate={{
-              scaleX: [1, 1.2, 1],
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="pt-6 px-4"
           >
-            <div className="w-48 h-2 bg-gradient-to-r from-transparent via-black to-transparent rounded-full shadow-lg" />
+            <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-white">
+              <div className="absolute -inset-1 bg-gradient-to-r from-black/10 via-gray-400/10 to-black/10 rounded-3xl blur-2xl pointer-events-none" />
+              <video
+                src={frontVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="relative w-full h-auto aspect-video"
+              />
+            </div>
           </motion.div>
         </motion.div>
 
@@ -272,25 +281,7 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Front Video Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.1 }}
-          className="pt-10 px-4"
-        >
-          <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-white">
-            <div className="absolute -inset-1 bg-gradient-to-r from-black/10 via-gray-400/10 to-black/10 rounded-3xl blur-2xl pointer-events-none" />
-            <video
-              src={frontVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="relative w-full h-auto aspect-video"
-            />
-          </div>
-        </motion.div>
+        
 
         {/* Scroll Indicator */}
         <motion.div
