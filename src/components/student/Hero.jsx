@@ -16,10 +16,10 @@ const Hero = () => {
   ];
 
   const stats = [
-    { number: "5000+", label: "Students Transformed", icon: "🎓" },
-    { number: "98%", label: "Success Rate", icon: "📈" },
-    { number: "50+", label: "Expert Courses", icon: "💎" },
-    { number: "24/7", label: "Support Available", icon: "🚀" }
+    { label: "Live 1-on-1 Mentorship", icon: "👨‍🏫" },
+    { label: "Weekly Sessions", icon: "📅" },
+    { label: "Practical & Affordable", icon: "💡" },
+    { label: "Get Certifications", icon: "🏅" }
   ];
 
   // Auto-rotate words
@@ -180,21 +180,22 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto py-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto py-10"
         >
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-4 bg-white/80 backdrop-blur-sm border border-black/10 rounded-2xl shadow-lg"
+              className="flex flex-col items-center justify-center text-center p-5 md:p-6 bg-white/90 backdrop-blur-sm border border-black/10 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition"
               whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-                backgroundColor: "rgba(255,255,255,0.9)"
+                scale: 1.04,
+                y: -4,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+                backgroundColor: "rgba(255,255,255,0.96)"
               }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <motion.div
-                className="text-2xl mb-2"
+                className="text-3xl md:text-4xl mb-3 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-black/5 border border-black/10"
                 animate={{ 
                   rotate: [0, 5, -5, 0],
                   scale: [1, 1.1, 1]
@@ -207,10 +208,7 @@ const Hero = () => {
               >
                 {stat.icon}
               </motion.div>
-              <div className="text-2xl md:text-3xl font-bold text-black mb-1">
-                {stat.number}
-              </div>
-              <div className="text-sm md:text-base text-gray-600 font-medium">
+              <div className="text-sm md:text-base text-gray-800 font-semibold">
                 {stat.label}
               </div>
             </motion.div>
