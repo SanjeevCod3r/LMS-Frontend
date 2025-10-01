@@ -58,6 +58,11 @@ const Footer = () => {
           </Link>
         </div>
       </div>
+
+      {/* Credit Line */}
+      <div className='w-full text-center mt-2 text-[11px] text-gray-500'>
+        Made by <a href="https://www.zestertech.com" target="_blank" rel="noopener noreferrer" className='underline hover:text-gray-700'>ZesterTech</a>
+      </div>
     </footer>
   )
 }

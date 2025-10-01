@@ -26,7 +26,7 @@ const Home = () => {
         <div className="section-divider"></div>
         
         {/* Section 2: Courses - Black */}
-        <div className="section-black">
+        <div id="courses" className="section-black">
           <CoursesSection/>
         </div>
         

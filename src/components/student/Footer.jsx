@@ -113,7 +113,6 @@ const Footer = () => {
 					<motion.div 
 						className="space-y-4"
 						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.3 }}
 						viewport={{ once: true }}
 					>
@@ -138,7 +137,6 @@ const Footer = () => {
 						</div>
 					</motion.div>
 				</motion.div>
-
 				{/* Bottom Section */}
 				<div className="py-4 text-center border-t border-white/10">
 					<div className="flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -149,6 +147,9 @@ const Footer = () => {
 							<Link to="" className="hover:text-white transition-colors duration-300">Terms</Link>
 							<Link to="" className="hover:text-white transition-colors duration-300">Privacy</Link>
 						</div>
+					</div>
+					<div className="mt-2 text-white/60 text-xs">
+						Made by <a href="https://www.zestertech.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">ZesterTech</a>
 					</div>
 				</div>
 			</div>
