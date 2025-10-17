@@ -261,7 +261,7 @@ const MyEnrollMents = () => {
 							<p className="text-gray-600 mb-6">Start your learning journey by enrolling in a course</p>
 							<button 
 								className="btn-black px-8 py-3 rounded-lg font-medium"
-								onClick={() => navigate("/courses")}
+								onClick={() => navigate("/course-list")}
 							>
 								Browse Courses
 							</button>
