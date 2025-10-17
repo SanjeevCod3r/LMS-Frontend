@@ -195,7 +195,7 @@ const WhyUs = () => {
 
           {/* Right Side - Dynamic Visual Display */}
           <motion.div 
-            className="relative mt-8 lg:mt-0"
+            className="relative mt-8 lg:mt-0 hidden md:block"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
